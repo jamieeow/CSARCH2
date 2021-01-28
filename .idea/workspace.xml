@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="CSARCH2:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="BranchesTreeState">
     <expand>
       <path>
@@ -20,19 +25,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d43cd702-eda7-4419-8e46-4832a90ba50d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/CSARCH2/Steps.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/lib.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/CSARCH2_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CSARCH2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/CSARCH2.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CSARCH2/CSARCH.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/CSARCH2/CSARCH.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CSARCH2/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CSARCH2/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CSARCH2/UnsignedIntDivController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CSARCH2/UnsignedIntDivController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -43,6 +50,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
   </component>
   <component name="ProjectId" id="1nZArSwOZjZK2i576Z5g8tRliGL" />
   <component name="ProjectViewState">
@@ -56,14 +66,25 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PATH_TO_FX$" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.JavaFX" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JAR Application.CSARCH2.jar">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="ALTERNATIVE_JRE_PATH" value="15" />
+      <option name="ALTERNATIVE_JRE_PATH" value="openjdk-15" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="CSARCH2.Main" />
       <module name="CSARCH2" />
@@ -78,19 +99,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
+    <configuration name="CSARCH2.jar" type="JarApplication" temporary="true">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/out/artifacts/CSARCH2_jar/CSARCH2.jar" />
+      <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JAR Application.CSARCH2.jar" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
@@ -127,14 +142,20 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="638" y="117" key="#Project_Structure" timestamp="1611810211762">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="498" y="0" key="#Project_Structure" timestamp="1611837241357">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state x="498" y="0" key="#Project_Structure/0.0.1536.824@0.0.1536.824" timestamp="1611837241357" />
     <state x="638" y="117" key="#Project_Structure/0.0.1920.1040@0.0.1920.1040" timestamp="1611810211762" />
-    <state x="210" y="157" width="1092" height="715" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1611810051092">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="168" y="124" width="874" height="639" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1611837861018">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state x="168" y="124" width="874" height="639" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1611837861018" />
     <state x="210" y="157" width="1092" height="715" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1611810051092" />
+    <state x="517" y="249" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog" timestamp="1611844537295">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="517" y="249" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog/0.0.1536.824@0.0.1536.824" timestamp="1611844537295" />
     <state x="728" y="326" key="#com.intellij.ide.macro.MacrosDialog" timestamp="1611650031194">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -143,37 +164,79 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="285" y="220" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1611814958403" />
-    <state x="485" y="304" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1611810049648">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="388" y="241" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1611844941642">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state x="388" y="241" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1536.824@0.0.1536.824" timestamp="1611844941642" />
     <state x="485" y="304" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1611810049648" />
-    <state x="761" y="344" key="FileChooserDialogImpl" timestamp="1611810845409">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="474" y="194" key="EnvironmentVariablesDialog" timestamp="1611837850621">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state x="474" y="194" key="EnvironmentVariablesDialog/0.0.1536.824@0.0.1536.824" timestamp="1611837850621" />
+    <state x="609" y="273" key="FileChooserDialogImpl" timestamp="1611844833345">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="609" y="273" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1611844833345" />
     <state x="761" y="344" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1611810845409" />
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1611820700541">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1611845229383">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1611845229383" />
     <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1611820700541" />
-    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1611820700541">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1611845229383">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1611845229383" />
     <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1611820700541" />
-    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1611820700541">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1611845229383">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1611845229383" />
     <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1611820700541" />
-    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1611820700541">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1611845229383">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1611845229383" />
     <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1611820700541" />
-    <state x="273" y="264" key="SettingsEditor" timestamp="1611810846973">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1611837984652">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state width="1493" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1611837984652" />
+    <state width="1493" height="261" key="GridCell.Tab.1.center" timestamp="1611837984651">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="261" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1611837984651" />
+    <state width="1493" height="261" key="GridCell.Tab.1.left" timestamp="1611837984651">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="261" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1611837984651" />
+    <state width="1493" height="261" key="GridCell.Tab.1.right" timestamp="1611837984651">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="261" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1611837984651" />
+    <state x="266" y="0" key="SettingsEditor" timestamp="1611844975968">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="266" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1611844975968" />
     <state x="273" y="264" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1611810846973" />
     <state x="616" y="240" key="run.anything.popup" timestamp="1611816120142">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1611816120142" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1611845084208">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1611845084208" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/CSARCH2/Main.java</url>
+          <line>10</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

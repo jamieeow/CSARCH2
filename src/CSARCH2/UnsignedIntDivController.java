@@ -25,6 +25,7 @@ public class UnsignedIntDivController {
     @FXML TextField textfield_divisor;
     @FXML Button button_calculate;
     @FXML Button button_export;
+    @FXML Button button_next;
     @FXML TableView <Steps> tableview_table;
     @FXML TableColumn <Steps,String>tablecolumn_s;
     @FXML TableColumn <Steps,String>tablecolumn_a;
@@ -34,8 +35,11 @@ public class UnsignedIntDivController {
     private Stage stage;
     @FXML AnchorPane ap;
     private static int passCount;
+    private static int stepBy = 0;
+    private static Alert a1;
 
 
+    //SHOW ALL
     public void main(TableView tableview_table) {
         //initialize();
 
@@ -48,11 +52,13 @@ public class UnsignedIntDivController {
             if (i == minStringSize - 1)
                 restore = A;
 
+
             //Add or Subtract
             if (!prevPositive)
                 A = addBinary(A, M, tableview_table);
             else
                 A = addBinary(A, Mneg, tableview_table);
+
 
             //Complement
             Q = Q + flip(A.charAt(0));
@@ -67,8 +73,64 @@ public class UnsignedIntDivController {
 
             printAll();
         }
+
+        stepBy = 0;
+        passCount = 0;
+        a1 = new Alert(Alert.AlertType.NONE,
+                "Success!",ButtonType.OK);
+        // show the dialog
+        a1.show();
     }
 
+    //STEP BY STEP
+    public void mainSteps(TableView tableview_table) {
+
+        if(stepBy%3 == 1)
+        {
+            shiftLeft(tableview_table);
+
+            //Last round restore save
+            if (passCount == minStringSize-1)
+                restore = A;
+        }
+
+
+        if(stepBy%3 == 2)
+        {
+            //Add or Subtract
+            if (!prevPositive)
+                A = addBinary(A, M, tableview_table);
+            else
+                A = addBinary(A, Mneg, tableview_table);
+        }
+
+
+        if(stepBy%3 == 0) {
+            //Complement
+            Q = Q + flip(A.charAt(0));
+
+            //prev pos or neg
+            setPrevSign();
+
+
+            //Last round restore save 2
+            if ((passCount== minStringSize-1) && A.charAt(0) == '1')
+                A = restore;
+
+            printAll();
+        }
+
+        if (passCount == minStringSize) {
+            stepBy = 0;
+            passCount = 0;
+            a1 = new Alert(Alert.AlertType.NONE,
+                    "Success!",ButtonType.OK);
+            // show the dialog
+            a1.show();
+        }
+    }
+
+    //play all button
     public void scan(){
         //getting first binary number from user
         //System.out.print("Enter Q: ");
@@ -76,9 +138,72 @@ public class UnsignedIntDivController {
         //getting second binary number from user
         //System.out.print("Enter M: ");
         M = textfield_divisor.getText();
-        //closing scanner after use to avoid memory leak
-        init();
-        main(tableview_table);
+
+        tableview_table.getItems().clear();
+         boolean invalid = false;
+
+        for(int i = 0; i<Q.length();i++)
+            if(Q.charAt(i) != '1' && Q.charAt(i) != '0' )
+                invalid = true;
+
+        for(int i = 0; i<M.length();i++)
+            if(M.charAt(i) != '1' && M.charAt(i) != '0' )
+                invalid = true;
+
+        if(Q.length() >16 || M.length()>16 || Q.equals("") || M.equals("") || invalid) {
+            a1 = new Alert(Alert.AlertType.ERROR,
+                    "INVALID INPUT!",ButtonType.OK);
+            // show the dialog
+            a1.show();
+        }
+        else{
+            stepBy = 0;
+            init();
+            main(tableview_table);
+        }
+    }
+
+    //STEPBYSTEP BUTTON
+    public void stepInc(){
+
+        if(stepBy == 0)
+        {
+            //getting first binary number from user
+            //System.out.print("Enter Q: ");
+            Q = textfield_dividend.getText();
+            //getting second binary number from user
+            //System.out.print("Enter M: ");
+            M = textfield_divisor.getText();
+
+            tableview_table.getItems().clear();
+            boolean invalid = false;
+
+            for(int i = 0; i<Q.length();i++)
+                if(Q.charAt(i) != '1' && Q.charAt(i) != '0' )
+                    invalid = true;
+
+            for(int i = 0; i<M.length();i++)
+                if(M.charAt(i) != '1' && M.charAt(i) != '0' )
+                    invalid = true;
+
+            if(Q.length() >16 || M.length()>16 || Q.equals("") || M.equals("") || invalid) {
+                a1 = new Alert(Alert.AlertType.ERROR,
+                        "INVALID INPUT!",ButtonType.OK);
+                // show the dialog
+                a1.show();
+            }
+
+            else{
+                stepBy = 1;
+                init();
+                mainSteps(tableview_table);
+            }
+        }
+        else{
+            stepBy++;
+            mainSteps(tableview_table);
+        }
+
     }
 
 
@@ -97,6 +222,8 @@ public class UnsignedIntDivController {
         tablecolumn_a.setCellValueFactory(new PropertyValueFactory<>("A"));
         tablecolumn_q.setCellValueFactory(new PropertyValueFactory<>("Q"));
         passCount = 0;
+        label_quotient.setText("N/A");
+        label_remainder.setText("N/A");
     }
 
     // This function adds two
@@ -250,7 +377,6 @@ public class UnsignedIntDivController {
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("text files (.txt)", ".txt"));
         Stage stage = (Stage) ap.getScene().getWindow();
         File selectedDirectory = fileChooser.showSaveDialog(stage);
-
         var path = selectedDirectory.getAbsolutePath();
 
         Writer writer = null;
