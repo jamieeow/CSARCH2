@@ -34,63 +34,65 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CSARCH2.UnsignedIntDivController">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CSARCH2.UnsignedIntDivController">
   <children>
-    <MenuBar VBox.vgrow="NEVER">
-      <menus>
-        <Menu mnemonicParsing="false" text="Clear">
-          <items>
-            <MenuItem mnemonicParsing="false" text="New" />
-            <MenuItem mnemonicParsing="false" text="Open…" />
-            <Menu mnemonicParsing="false" text="Open Recent" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Close" />
-            <MenuItem mnemonicParsing="false" text="Save" />
-            <MenuItem mnemonicParsing="false" text="Save As…" />
-            <MenuItem mnemonicParsing="false" text="Revert" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Preferences…" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Quit" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Help">
-          <items>
-            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
-          </items>
-        </Menu>
-      </menus>
-    </MenuBar>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+    <AnchorPane fx:id="ap" maxHeight="-1.0" maxWidth="-1.0" prefHeight="400.0" prefWidth="620.0" VBox.vgrow="ALWAYS">
       <children>
-            <TextField fx:id="textfield_dividend" layoutX="14.0" layoutY="49.0" />
-            <TextField fx:id="textfield_divisor" layoutX="192.0" layoutY="49.0" />
+            <TextField fx:id="textfield_dividend" layoutX="14.0" layoutY="51.0" />
+            <TextField fx:id="textfield_divisor" layoutX="175.0" layoutY="51.0" />
             <Label layoutX="14.0" layoutY="6.0" text="Binary input (16-bit max):" />
-            <Label layoutX="14.0" layoutY="29.0" text="Dividend:" />
-            <Label layoutX="192.0" layoutY="29.0" text="Divisor:" />
-            <Label layoutX="182.0" layoutY="54.0" text="/" />
-            <TableView fx:id="tableview_table" layoutX="14.0" layoutY="85.0" prefHeight="200.0" prefWidth="444.0">
+            <Label layoutX="14.0" layoutY="34.0" text="Dividend:" />
+            <Label layoutX="177.0" layoutY="34.0" text="Divisor:" />
+            <Label layoutX="167.0" layoutY="54.0" text="/" />
+            <Label layoutX="16.0" layoutY="373.0" text="Quotient:" />
+            <Label layoutX="16.0" layoutY="356.0" text="Remainder:" />
+            <Label fx:id="label_quotient" layoutX="81.0" layoutY="373.0" text="N/A" />
+            <Label fx:id="label_remainder" layoutX="81.0" layoutY="356.0" text="N/A" />
+            <Button fx:id="button_calculate" layoutX="440.0" layoutY="50.0" mnemonicParsing="false" onAction="#scan" prefHeight="25.0" prefWidth="36.0">
+               <graphic>
+                  <ImageView fitHeight="17.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@playall.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button layoutX="576.0" layoutY="51.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="36.0">
+               <graphic>
+                  <ImageView fitHeight="17.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@playstep.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Label layoutX="391.0" layoutY="55.0" text="Play All" />
+            <Label layoutX="496.0" layoutY="55.0" text="Step-By-Step" />
+            <Button fx:id="button_export" layoutX="576.0" layoutY="364.0" mnemonicParsing="false" onAction="#writeExcel" prefHeight="25.0" prefWidth="36.0">
+               <graphic>
+                  <ImageView fitHeight="17.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@playexport.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Label layoutX="498.0" layoutY="368.0" text="Export to .txt" />
+            <TableView fx:id="tableview_table" layoutX="14.0" layoutY="87.0" minWidth="-Infinity" prefHeight="265.0" prefWidth="600.0">
               <columns>
-                <TableColumn fx:id="tablecolumn_i" prefWidth="55.035104751586914" text="Iteration" />
-                <TableColumn fx:id="tablecolumn_a" prefWidth="191.78900909423828" text="A" />
-                  <TableColumn fx:id="tablecolumn_q" prefWidth="195.71096801757812" text="Q" />
+                <TableColumn fx:id="tablecolumn_s" maxWidth="200.0" prefWidth="200.0" text="Step" />
+                <TableColumn fx:id="tablecolumn_a" maxWidth="200.0" prefWidth="200.0" text="A" />
+                  <TableColumn fx:id="tablecolumn_q" maxWidth="200.0" prefWidth="179.0" text="Q" />
               </columns>
             </TableView>
-            <Label layoutX="12.0" layoutY="301.0" text="Quotient:" />
-            <Label layoutX="12.0" layoutY="322.0" text="Remainder:" />
-            <Label fx:id="label_quotient" layoutX="97.0" layoutY="301.0" text="Label" />
-            <Label fx:id="label_remainder" layoutX="97.0" layoutY="322.0" text="Label" />
-            <Button fx:id="button_calculate" layoutX="366.0" layoutY="49.0" mnemonicParsing="false" onAction="#scan" text="Calculate" />
       </children>
     </AnchorPane>
   </children>

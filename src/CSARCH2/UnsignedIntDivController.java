@@ -1,12 +1,16 @@
 package CSARCH2;
 
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-
-import java.net.URL;
-import java.util.ResourceBundle;
-import java.util.Scanner;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.Writer;
+import java.nio.file.Paths;
 
 public class UnsignedIntDivController {
 
@@ -20,22 +24,25 @@ public class UnsignedIntDivController {
     @FXML TextField textfield_dividend;
     @FXML TextField textfield_divisor;
     @FXML Button button_calculate;
-    @FXML TableView tableview_table;
-    @FXML TableColumn tablecolumn_i;
-    @FXML TableColumn tablecolumn_a;
-    @FXML TableColumn tablecolumn_q;
+    @FXML Button button_export;
+    @FXML TableView <Steps> tableview_table;
+    @FXML TableColumn <Steps,String>tablecolumn_s;
+    @FXML TableColumn <Steps,String>tablecolumn_a;
+    @FXML TableColumn <Steps,String>tablecolumn_q;
     @FXML Label label_quotient;
     @FXML Label label_remainder;
+    private Stage stage;
+    @FXML AnchorPane ap;
+    private static int passCount;
 
 
-
-    public void main() {
+    public void main(TableView tableview_table) {
         //initialize();
 
         //LOOP
         for (int i = 0; i < minStringSize; i++) {
             //Shift Left
-            shiftLeft();
+            shiftLeft(tableview_table);
 
             //Last round restore save
             if (i == minStringSize - 1)
@@ -43,9 +50,9 @@ public class UnsignedIntDivController {
 
             //Add or Subtract
             if (!prevPositive)
-                A = addBinary(A, M);
+                A = addBinary(A, M, tableview_table);
             else
-                A = addBinary(A, Mneg);
+                A = addBinary(A, Mneg, tableview_table);
 
             //Complement
             Q = Q + flip(A.charAt(0));
@@ -63,7 +70,6 @@ public class UnsignedIntDivController {
     }
 
     public void scan(){
-
         //getting first binary number from user
         //System.out.print("Enter Q: ");
         Q = textfield_dividend.getText();
@@ -72,8 +78,10 @@ public class UnsignedIntDivController {
         M = textfield_divisor.getText();
         //closing scanner after use to avoid memory leak
         init();
-        main();
+        main(tableview_table);
     }
+
+
 
     public void init(){
         //INITIALIZE
@@ -85,12 +93,16 @@ public class UnsignedIntDivController {
             Q = signExtension(minStringSize, Q);
         Mneg = printOneAndTwosComplement(M);
         prevPositive = true;
+        tablecolumn_s.setCellValueFactory(new PropertyValueFactory<>("Step"));
+        tablecolumn_a.setCellValueFactory(new PropertyValueFactory<>("A"));
+        tablecolumn_q.setCellValueFactory(new PropertyValueFactory<>("Q"));
+        passCount = 0;
     }
 
     // This function adds two
     // binary strings and return
     // result as a third string
-    private static String addBinary(String a, String b)
+    private static String addBinary(String a, String b, TableView tableview_table)
     {
 
         // Initialize result
@@ -105,7 +117,7 @@ public class UnsignedIntDivController {
         while (i >= 0 || j >= 0 || s == 1)
         {
 
-            // Comput sum of last
+            // Compute   sum of last
             // digits and carry
             s += ((i >= 0)? a.charAt(i) - '0': 0);
             s += ((j >= 0)? b.charAt(j) - '0': 0);
@@ -127,7 +139,8 @@ public class UnsignedIntDivController {
         System.out.println("Add:");
         System.out.println("Q: " + Q);
         System.out.println("A: " + result);
-
+        Steps person = new Steps("Add", result,Q);
+        tableview_table.getItems().add(person);
         return result;
     }
 
@@ -181,7 +194,7 @@ public class UnsignedIntDivController {
         return twos;
     }
 
-    private static void shiftLeft(){
+    private static void shiftLeft(TableView tableview_table){
         char shift = Q.charAt(0);
         Q = Q.substring(1, Q.length());
         A = A.substring(1, A.length()) + shift;
@@ -189,6 +202,9 @@ public class UnsignedIntDivController {
         System.out.println("Shift Left");
         System.out.println("Q: " + Q);
         System.out.println("A: " + A);
+        Steps person = new Steps("Shift Left", A,Q);
+        tableview_table.getItems().add(person);
+
 
     }
 
@@ -214,13 +230,44 @@ public class UnsignedIntDivController {
 
     //TESTING PURPOSES
      public void printAll(){
+         passCount++;
 //        System.out.println("Nth Pass: ");
 //        System.out.println("Q: " + Q);
 //        System.out.println("A: " + A);
         label_quotient.setText(Q);
         label_remainder.setText(A);
+        Steps person = new Steps("Pass number: "+ passCount, A,Q);
+        tableview_table.getItems().add(person);
     }
+    public void setStage(Stage stage){
+        this.stage=stage;
+    }
+    public void writeExcel() throws Exception {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save");
+        String currentPath = Paths.get(".").toAbsolutePath().normalize().toString();
+        fileChooser.setInitialDirectory(new File(currentPath));
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("text files (.txt)", ".txt"));
+        Stage stage = (Stage) ap.getScene().getWindow();
+        File selectedDirectory = fileChooser.showSaveDialog(stage);
 
+        var path = selectedDirectory.getAbsolutePath();
 
+        Writer writer = null;
+        try {
+            File file = new File(path);
+            writer = new BufferedWriter(new FileWriter(file));
+            for (Steps steps : tableview_table.getItems()) {
+                String text = "Step: " + steps.getStep() + "\nA:" + steps.getA() + " Q:" + steps.getQ() + "\n\n";
+                writer.write(text);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        finally {
+            writer.flush();
+            writer.close();
+        }
+    }
 
 }

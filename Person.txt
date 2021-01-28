@@ -1,0 +1,12 @@
+Step: Shift Left		A: 00000		Q:111
+Step: Add		A: 11111		Q:111
+Step: nth pass		A: 11111		Q:1110
+Step: Shift Left		A: 11111		Q:110
+Step: Add		A: 00000		Q:110
+Step: nth pass		A: 00000		Q:1101
+Step: Shift Left		A: 00001		Q:101
+Step: Add		A: 00000		Q:101
+Step: nth pass		A: 00000		Q:1011
+Step: Shift Left		A: 00001		Q:011
+Step: Add		A: 00000		Q:011
+Step: nth pass		A: 00000		Q:0111
