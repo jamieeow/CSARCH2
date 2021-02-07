@@ -350,20 +350,21 @@ public class csarch2executable extends javax.swing.JFrame {
             //Shift Left
             shiftLeft(tableview_table);
 
-            //Last round restore save
-            if (passCount == minStringSize - 1)
-                restore = A;
 
 
             //Add or Subtract
             if (!prevPositive)
-                A = addBinary(A, M, tableview_table, false);
+                A = addBinary(A, M, tableview_table, false, false);
             else
-                A = addBinary(A, Mneg, tableview_table, true);
+                A = addBinary(A, Mneg, tableview_table, true, false);
 
 
             //Complement
             Q = Q + flip(A.charAt(0));
+            
+              //Last round restore save
+            if (passCount == minStringSize - 1)
+                restore = addBinary(A, M, tableview_table, false, true);
 
             //prev pos or neg
             setPrevSign();
@@ -387,9 +388,6 @@ public class csarch2executable extends javax.swing.JFrame {
         {
             shiftLeft(tableview_table);
 
-            //Last round restore save
-            if (passCount == minStringSize-1)
-                restore = A;
         }
 
 
@@ -397,16 +395,19 @@ public class csarch2executable extends javax.swing.JFrame {
         {
             //Add or Subtract
             if (!prevPositive)
-                A = addBinary(A, M, tableview_table, false);
+                A = addBinary(A, M, tableview_table, false, false);
             else
-                A = addBinary(A, Mneg, tableview_table, true);
+                A = addBinary(A, Mneg, tableview_table, true, false);
         }
 
 
         if(stepBy%3 == 0) {
             //Complement
             Q = Q + flip(A.charAt(0));
-
+             //Last round restore save
+            if (passCount == minStringSize - 1)
+                restore = addBinary(A, M, tableview_table, false, true);
+            
             //prev pos or neg
             setPrevSign();
 
@@ -524,7 +525,7 @@ public class csarch2executable extends javax.swing.JFrame {
     // This function adds two
     // binary strings and return
     // result as a third string
-    private static String addBinary(String a, String b, javax.swing.JTable tableview_table, Boolean negCheck)
+    private static String addBinary(String a, String b, javax.swing.JTable tableview_table, Boolean negCheck, Boolean restore)
     {
 
         // Initialize result
@@ -563,13 +564,17 @@ public class csarch2executable extends javax.swing.JFrame {
         System.out.println("A: " + result);
         DefaultTableModel model = (DefaultTableModel) tableview_table.getModel();
         
-        if(negCheck){
-            model.addRow(new Object[]{"Subtract", result,Q});
+        if(!restore)
+        {
+            if(negCheck){
+                model.addRow(new Object[]{"Subtract", result,Q});
+            }
+            else{
+                model.addRow(new Object[]{"Add", result,Q});
+            }
+            tableview_table.scrollRectToVisible(tableview_table.getCellRect(tableview_table.getRowCount()-1, 0, true));
         }
-        else{
-            model.addRow(new Object[]{"Add", result,Q});
-        }
-        tableview_table.scrollRectToVisible(tableview_table.getCellRect(tableview_table.getRowCount()-1, 0, true));
+        
         return result;
     }
 
