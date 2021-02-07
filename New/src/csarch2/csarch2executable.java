@@ -684,6 +684,7 @@ public class csarch2executable extends javax.swing.JFrame {
         {
             A = restore;
             model.addRow(new Object[]{"Restore", A,Q});
+            model.addRow(new Object[]{"Pass number: "+ passCount, A,Q});
         }
         label_quotient.setText(Q);
         label_remainder.setText(A);
