@@ -1,22 +1,32 @@
+========================
+BUILD OUTPUT DESCRIPTION
+========================
 
+When you build an Java application project that has a main class, the IDE
+automatically copies all of the JAR
+files on the projects classpath to your projects dist/lib folder. The IDE
+also adds each of the JAR files to the Class-Path element in the application
+JAR files manifest file (MANIFEST.MF).
 
-Play All Instructions
-1.)Input 1bit to 16bit binary number for Dividend and Divisor.
-2.)Click GREEN Play all button.
-3.)Check Remainder and Quotient for final answer.
+To run the project from the command line, go to the dist folder and
+type the following:
 
-Step-by-step Instructions
-1.)Input 1bit to 16bit binary number for Dividend and Divisor.
-2.)Click BLUE Step-by-step button until Success Message received.
-3.)Check Remainder and Quotient for current pass (will print final answer at the last pass)
+java -jar "CSARCH2.jar" 
 
-NOTE: Play all can be clicked during Step-by-step to finish all steps
+To distribute this project, zip up the dist folder (including the lib folder)
+and distribute the ZIP file.
 
-For Export Instructions
-1.)Click Export to... button
-2.)Enter Filename (no need for extension, automatically .txt)
+Notes:
 
-NOTE: Exports all of the contents of the current state of the table.
-
-To export all steps, enter input, click PLAY ALL, click EXPORT TO..., then save.
-
+* If two JAR files on the project classpath have the same name, only the first
+JAR file is copied to the lib folder.
+* Only JAR files are copied to the lib folder.
+If the classpath contains other types of files or folders, these files (folders)
+are not copied.
+* If a library on the projects classpath also has a Class-Path element
+specified in the manifest,the content of the Class-Path element has to be on
+the projects runtime path.
+* To set a main class in a standard Java project, right-click the project node
+in the Projects window and choose Properties. Then click Run and enter the
+class name in the Main Class field. Alternatively, you can manually type the
+class name in the manifest Main-Class element.

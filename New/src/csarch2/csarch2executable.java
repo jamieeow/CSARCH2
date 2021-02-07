@@ -68,11 +68,11 @@ public class csarch2executable extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Steps", "A", "Q"
+                "Steps", "A", "Q", "M"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -351,15 +351,15 @@ public class csarch2executable extends javax.swing.JFrame {
             shiftLeft(tableview_table);
 
             //Last round restore save
-            if (i == minStringSize - 1)
+            if (passCount == minStringSize - 1)
                 restore = A;
 
 
             //Add or Subtract
             if (!prevPositive)
-                A = addBinary(A, M, tableview_table);
+                A = addBinary(A, M, tableview_table, false);
             else
-                A = addBinary(A, Mneg, tableview_table);
+                A = addBinary(A, Mneg, tableview_table, true);
 
 
             //Complement
@@ -367,11 +367,6 @@ public class csarch2executable extends javax.swing.JFrame {
 
             //prev pos or neg
             setPrevSign();
-
-
-            //Last round restore save 2
-            if ((i == minStringSize - 1) && A.charAt(0) == '1')
-                A = restore;
 
             printAll();
         }
@@ -402,9 +397,9 @@ public class csarch2executable extends javax.swing.JFrame {
         {
             //Add or Subtract
             if (!prevPositive)
-                A = addBinary(A, M, tableview_table);
+                A = addBinary(A, M, tableview_table, false);
             else
-                A = addBinary(A, Mneg, tableview_table);
+                A = addBinary(A, Mneg, tableview_table, true);
         }
 
 
@@ -414,11 +409,6 @@ public class csarch2executable extends javax.swing.JFrame {
 
             //prev pos or neg
             setPrevSign();
-
-
-            //Last round restore save 2
-            if ((passCount== minStringSize-1) && A.charAt(0) == '1')
-                A = restore;
 
             printAll();
         }
@@ -517,12 +507,14 @@ public class csarch2executable extends javax.swing.JFrame {
         //INITIALIZE
         minStringSize = Math.max(Q.length(), M.length());
         A = "0";
-        A = signExtension(minStringSize+1, A);
-        M = signExtension(minStringSize+1, M);
+        A = zeroExtension(minStringSize+1, A);
+        M = zeroExtension(minStringSize+1, M);
         if(Q.length() < minStringSize)
-            Q = signExtension(minStringSize, Q);
+            Q = zeroExtension(minStringSize, Q);
         Mneg = printOneAndTwosComplement(M);
         prevPositive = true;
+        DefaultTableModel model = (DefaultTableModel) tableview_table.getModel();
+        model.addRow(new Object[]{"Initial Values", A,Q,M});
 
         passCount = 0;
         label_quotient.setText("N/A");
@@ -532,7 +524,7 @@ public class csarch2executable extends javax.swing.JFrame {
     // This function adds two
     // binary strings and return
     // result as a third string
-    private static String addBinary(String a, String b, javax.swing.JTable tableview_table)
+    private static String addBinary(String a, String b, javax.swing.JTable tableview_table, Boolean negCheck)
     {
 
         // Initialize result
@@ -570,7 +562,13 @@ public class csarch2executable extends javax.swing.JFrame {
         System.out.println("Q: " + Q);
         System.out.println("A: " + result);
         DefaultTableModel model = (DefaultTableModel) tableview_table.getModel();
-        model.addRow(new Object[]{"Add", result,Q});
+        
+        if(negCheck){
+            model.addRow(new Object[]{"Subtract", result,Q});
+        }
+        else{
+            model.addRow(new Object[]{"Add", result,Q});
+        }
         tableview_table.scrollRectToVisible(tableview_table.getCellRect(tableview_table.getRowCount()-1, 0, true));
         return result;
     }
@@ -652,6 +650,19 @@ public class csarch2executable extends javax.swing.JFrame {
 
         return extended;
     }
+    
+    private static String zeroExtension(int min, String src){
+        String extended = "";
+        char sign = '0';
+        int addSign = min - src.length();
+
+        for(int i = 0; i<addSign ;i++){
+            extended+= sign;
+        }
+        extended = extended + src;
+
+        return extended;
+    }
 
     private static void setPrevSign(){
         if(A.charAt(0) == '1')
@@ -662,14 +673,20 @@ public class csarch2executable extends javax.swing.JFrame {
 
     //TESTING PURPOSES
      public void printAll(){
-         passCount++;
+           passCount++;
 //        System.out.println("Nth Pass: ");
 //        System.out.println("Q: " + Q);
 //        System.out.println("A: " + A);
-        label_quotient.setText(Q);
-        label_remainder.setText(A);
         DefaultTableModel model = (DefaultTableModel) tableview_table.getModel();
         model.addRow(new Object[]{"Pass number: "+ passCount, A,Q});
+          //Last round restore save 2
+        if ((passCount== minStringSize) && A.charAt(0) == '1')
+        {
+            A = restore;
+            model.addRow(new Object[]{"Restore", A,Q});
+        }
+        label_quotient.setText(Q);
+        label_remainder.setText(A);
         tableview_table.scrollRectToVisible(tableview_table.getCellRect(tableview_table.getRowCount()-1, 0, true));
     }
 
@@ -699,8 +716,15 @@ public class csarch2executable extends javax.swing.JFrame {
                             case 1:
                                 writer.write("A: " + model.getValueAt(row, column).toString() + "\t");
                                 break;
+                            case 3:
+                                if(row == 0)
+                                  writer.write("M: " + model.getValueAt(row, column).toString() + "\n\n");
+                                break;
                             default:
-                                writer.write("Q: " + model.getValueAt(row, column).toString() + "\n\n");
+                                if(row == 0)
+                                    writer.write("Q: " + model.getValueAt(row, column).toString() + "\t\t");
+                                else
+                                    writer.write("Q: " + model.getValueAt(row, column).toString() + "\n\n");
                                 break;
                         }
                     }
