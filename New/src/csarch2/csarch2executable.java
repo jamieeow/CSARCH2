@@ -683,8 +683,7 @@ public class csarch2executable extends javax.swing.JFrame {
         if ((passCount== minStringSize) && A.charAt(0) == '1')
         {
             A = restore;
-            model.addRow(new Object[]{"Restore", A,Q});
-            model.addRow(new Object[]{"Pass number: "+ passCount, A,Q});
+            model.addRow(new Object[]{"Pass number: "+ passCount + " (Restore)", A,Q});
         }
         label_quotient.setText(Q);
         label_remainder.setText(A);
